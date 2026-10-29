@@ -1,0 +1,293 @@
+/* Skald components: CSS classes over tokens.css. The CSS draws every state; behaviour
+   (tab keys, dialog focus, tooltip timing) is the app's, see each component's README. */
+
+.sk-root {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-skald);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    word-break: keep-all;   /* Korean wraps between words, not inside them */
+}
+
+.sk-root :focus-visible {
+    outline: var(--line-focus) solid var(--focus);
+    outline-offset: 2px;
+}
+
+/* Title and headings */
+.sk-title {
+    margin: 0;
+    font-size: 30.4px;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-strong);
+    overflow-wrap: anywhere;
+}
+
+.sk-heading {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-strong);
+}
+
+.sk-rule {
+    border: 0;
+    border-top: var(--line-hair) solid var(--border);
+    margin: 0;
+}
+
+/* Panel: the cover, two edge lines (the outer border and the tooling inside it) */
+.sk-panel {
+    position: relative;
+    background: var(--bg);
+    border: var(--line-hair) solid var(--border);
+    outline: var(--line-hair) solid var(--border);
+    outline-offset: calc(-1 * var(--space-tooling));
+    border-radius: var(--radius-none);
+}
+
+.sk-panel-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border-bottom: var(--line-hair) solid var(--border);
+}
+
+.sk-panel-body {
+    padding: var(--space-5);
+}
+
+/* Card: a raised page inside the panel */
+.sk-card {
+    padding: var(--space-5);
+    background: var(--surface);
+    border: var(--line-hair) solid var(--border);
+    border-radius: var(--radius-none);
+}
+
+/* Buttons: a word on an underline */
+.sk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 14px;
+    font: inherit;
+    font-size: 13.6px;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    border-bottom: var(--line-hair) solid var(--border);
+    border-radius: var(--radius-none);
+    cursor: pointer;
+}
+.sk-btn:hover:not(:disabled) { border-bottom-color: currentColor; }
+.sk-btn--primary { color: var(--text-strong); border-bottom-color: var(--accent); }
+.sk-btn--danger { color: var(--danger); }
+.sk-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* School tabs */
+.sk-tabs { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sk-tab {
+    padding: var(--space-2) 7px;
+    font: inherit;
+    font-size: 12.8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: transparent;
+    border: 0;
+    border-bottom: var(--line-tab) solid transparent;
+    border-radius: var(--radius-none);
+    cursor: pointer;
+}
+.sk-tab:hover { background: var(--wash-08); }
+.sk-tab[aria-selected="true"] { background: var(--wash-14); color: var(--text-strong); border-bottom-color: var(--accent); }
+
+/* Segmented toggle */
+.sk-seg { display: inline-flex; }
+.sk-seg button {
+    padding: 5px 13px;
+    font: inherit;
+    font-size: 13.6px;
+    color: var(--text-muted);
+    background: transparent;
+    border: var(--line-hair) solid var(--border-control);
+    border-radius: var(--radius-none);
+    cursor: pointer;
+}
+.sk-seg button + button { border-left: 0; }
+.sk-seg button:hover:not([aria-pressed="true"]) { background: var(--wash-08); }
+.sk-seg button[aria-pressed="true"] { background: var(--wash-16); color: var(--text-strong); border-bottom: var(--line-tab) solid var(--accent); padding-bottom: 4px; }
+
+/* Check: a square like SkyUI's MCM */
+.sk-check { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; font-size: 13.6px; }
+.sk-check input {
+    appearance: none;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    border: var(--line-hair) solid var(--accent);
+    border-radius: var(--radius-none);
+    background: transparent;
+    padding: 3px;
+    background-clip: content-box;
+    cursor: pointer;
+}
+.sk-check input:checked { background-color: var(--accent); }
+.sk-check input:indeterminate { background-color: var(--accent); padding: 7px 3px; }
+
+
+/* Page corners: the knotwork ornament mirrored into four corners */
+.sk-corner { position: absolute; width: 100px; height: 100px; pointer-events: none; }
+.sk-corner--tl { top: 0; left: 0; }
+.sk-corner--tr { top: 0; right: 0; transform: scaleX(-1); }
+.sk-corner--bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.sk-corner--br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+/* School marks */
+.sk-mark { width: 24px; height: 24px; display: inline-block; vertical-align: middle; }
+
+/* ------------------------------------------------------------------ general UI
+   Values from the Heart of Magic panel where it has the control (setting rows,
+   select, modal, tooltip, progress, badge); the rest is listed in the README. */
+
+.sk-root ::-webkit-scrollbar { width: 12px; height: 12px; }
+.sk-root ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.25); }
+.sk-root ::-webkit-scrollbar-thumb { background: var(--border); }
+
+/* Disabled controls: 40% for every control */
+.sk-root :disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Tabs (general): the school tabs' look, larger */
+.sk-tab--lg { padding: 9px 18px; font-size: 15.2px; }
+
+/* Field: label, control, help or error */
+.sk-field { display: grid; gap: 6px; min-width: 0; }
+.sk-label { font-size: 15.2px; font-weight: 500; letter-spacing: 0.3px; color: var(--text-strong); }
+.sk-help { font-size: 12px; line-height: 1.4; color: var(--text-muted); }
+.sk-error-text { font-size: 12px; line-height: 1.4; color: var(--error); }
+.sk-textfield,
+.sk-select,
+.sk-textarea {
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 14.4px;
+    color: var(--text-strong);
+    background-color: var(--well);
+    border: var(--line-hair) solid var(--border-control);
+    border-radius: var(--radius-none);
+    min-width: 160px;
+}
+.sk-textarea { min-height: 88px; resize: vertical; line-height: 1.4; }
+.sk-textfield::placeholder, .sk-textarea::placeholder { color: var(--text-muted); }
+.sk-textfield:hover, .sk-select:hover, .sk-textarea:hover { border-color: var(--text-muted); }
+.sk-field--error .sk-textfield, .sk-field--error .sk-select, .sk-field--error .sk-textarea { border-color: var(--error); }
+.sk-select {
+    appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23cbc5b6'/%3E%3C/svg%3E");
+    background-position: right 10px center;
+    background-size: 10px 6px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.sk-select option { background: var(--surface); color: var(--text); }
+
+/* Radio: the check's square, as a ring */
+.sk-radio { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; font-size: 13.6px; }
+.sk-radio input {
+    appearance: none; margin: 0; width: 18px; height: 18px; padding: 3px;
+    border: var(--line-hair) solid var(--accent); border-radius: var(--radius-round);
+    background: transparent; background-clip: content-box; cursor: pointer;
+}
+.sk-radio input:checked { background-color: var(--accent); }
+
+/* Setting row: a name and its control on one line, rows split by a faint line */
+.sk-setting {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
+    padding: 12px 8px;
+    border-bottom: var(--line-hair) solid rgba(255, 255, 255, 0.06);
+}
+.sk-setting:last-child { border-bottom: 0; }
+.sk-setting:hover { background: rgba(255, 255, 255, 0.04); }
+.sk-setting > div:first-child { display: grid; gap: 2px; min-width: 0; flex: 1 1 220px; }
+
+/* Table: rules between rows, no boxes */
+.sk-table-wrap { overflow-x: auto; }
+.sk-table { width: 100%; border-collapse: collapse; font-size: 13.6px; font-variant-numeric: tabular-nums; }
+.sk-table th {
+    text-align: left; font-weight: 400; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-muted); background: var(--surface-top);
+    padding: var(--space-3) var(--space-4); border-bottom: var(--line-hair) solid var(--accent);
+}
+.sk-table td { padding: 10px var(--space-4); border-bottom: var(--line-hair) solid var(--border); color: var(--text); }
+.sk-table tbody tr:hover td { background: var(--wash-06); }
+.sk-table .num { text-align: right; }
+
+/* Dialog */
+.sk-scrim { background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: var(--space-5); }
+.sk-dialog {
+    width: 480px; max-width: 90%; max-height: 80vh; display: flex; flex-direction: column;
+    background: var(--surface); border: var(--line-hair) solid var(--border);
+    outline: var(--line-hair) solid var(--border); outline-offset: calc(-1 * var(--space-tooling));
+}
+.sk-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: 12px 16px; border-bottom: var(--line-hair) solid var(--border); background: var(--wash-06); }
+.sk-dialog-header h3 { margin: 0; font-size: 15.2px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--text-strong); }
+.sk-dialog-body { padding: 16px; overflow-y: auto; line-height: 1.4; }
+.sk-dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-4); padding: 12px 16px; border-top: var(--line-hair) solid var(--border); }
+.sk-close { background: none; border: 0; color: var(--text-muted); font: inherit; font-size: 17.6px; line-height: 1; padding: 4px; cursor: pointer; }
+.sk-close:hover { color: var(--text-strong); }
+
+/* Notice: a status word and a line of text, framed, no fill colour */
+.sk-notice { display: grid; grid-template-columns: auto 1fr; gap: 2px var(--space-3); padding: 10px 12px; border: var(--line-hair) solid var(--border); background: var(--surface); font-size: 13.6px; line-height: 1.4; }
+.sk-notice b { font-weight: 500; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; padding-top: 1px; }
+.sk-notice--success b { color: var(--success); }
+.sk-notice--warning b { color: var(--warning); }
+.sk-notice--error b { color: var(--error); }
+.sk-notice--info b { color: var(--text-strong); }
+
+/* Badge (the version tag) */
+.sk-badge { display: inline-block; padding: 2px 8px; font-size: 12.8px; letter-spacing: 1px; background: var(--wash-08); color: var(--text-strong); border: var(--line-hair) solid var(--border); border-radius: var(--radius-none); }
+.sk-badge--success { color: var(--success); }
+.sk-badge--warning { color: var(--warning); }
+.sk-badge--error { color: var(--error); }
+
+/* Progress: a 6px bar */
+.sk-progress { display: grid; gap: 5px; }
+.sk-progress-label { display: flex; justify-content: space-between; font-size: 12.8px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.sk-progress-track { height: 6px; background: rgba(0, 0, 0, 0.4); border: var(--line-hair) solid var(--border); overflow: hidden; }
+.sk-progress-bar { height: 100%; background: var(--accent); }
+
+/* Tooltip */
+.sk-tooltip { display: inline-block; max-width: 200px; padding: 8px 12px; background: rgba(0, 0, 0, 0.95); border: var(--line-hair) solid var(--border); font-size: 12px; line-height: 1.4; color: var(--text); }
+.sk-tooltip strong { display: block; font-weight: 400; font-size: 14.4px; letter-spacing: 0.5px; color: var(--text-strong); margin-bottom: 3px; }
+
+/* Top bar */
+.sk-topbar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-5); padding: var(--space-3) var(--space-5); background: var(--surface-top); border-bottom: var(--line-hair) solid var(--border); }
+.sk-topbar .sk-brand { font-size: 17.6px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-strong); margin-right: var(--space-4); }
+.sk-topbar nav { display: flex; flex-wrap: wrap; gap: var(--space-2); flex: 1; }
+.sk-topbar nav a { padding: 6px 10px; font-size: 12.8px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: var(--line-tab) solid transparent; }
+.sk-topbar nav a:hover { color: var(--text); background: var(--wash-08); }
+.sk-topbar nav a[aria-current="page"] { color: var(--text-strong); border-bottom-color: var(--accent); }
+
+/* Section: a heading over a rule, then rows */
+.sk-section { display: grid; gap: var(--space-3); }
+.sk-section > .sk-heading { padding-bottom: var(--space-2); border-bottom: var(--line-hair) solid var(--border); }
+
+/* States: required, read-only, table messages, native dialog */
+.sk-required { margin-left: 6px; font-size: 12px; font-weight: 400; letter-spacing: 0.5px; color: var(--text-muted); }
+.sk-textfield[readonly], .sk-textarea[readonly] { border-style: dashed; background-color: transparent; color: var(--text-muted); }
+.sk-textfield[aria-invalid="true"], .sk-textarea[aria-invalid="true"], .sk-select[aria-invalid="true"] { border-color: var(--error); }
+.sk-table td.sk-table-state { padding: var(--space-5) var(--space-4); color: var(--text-muted); }
+.sk-table td.sk-table-state .sk-btn { margin-left: var(--space-3); }
+dialog.sk-dialog { padding: 0; color: var(--text); }
+dialog.sk-dialog::backdrop { background: var(--scrim); }
+dialog.sk-dialog:not([open]) { display: none; }

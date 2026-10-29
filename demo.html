@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skald demo</title>
+<link rel="stylesheet" href="skald-tokens.css">
+<link rel="stylesheet" href="skald.css">
+<style>
+  body { margin: 0; background: #000; font-family: var(--font-skald); }
+  .demo-card { border-bottom: 8px solid #000; }
+  .demo-name { margin: 0; padding: 6px 16px; font: 12px/1.4 var(--font-mono); color: var(--ink-faint); background: var(--surface-deep); }
+</style>
+</head>
+<body>
+<section class="demo-card" aria-label="SettingsPage">
+<h2 class="demo-name">SettingsPage</h2>
+<div class="sk-root" style="min-height:740px">
+  <header class="sk-topbar">
+    <span class="sk-brand">Archive</span>
+    <nav aria-label="주 메뉴"><a href="#">대시보드</a><a href="#">프로젝트</a><a href="#" aria-current="page">설정</a></nav>
+    <span class="sk-badge">v1.6</span>
+  </header>
+  <form style="padding:24px max(16px,4vw);display:grid;gap:24px;max-width:860px" onsubmit="event.preventDefault()">
+    <h1 class="sk-title">Settings</h1>
+    <div class="sk-tabs" role="tablist" aria-label="설정 구역">
+      <button type="button" class="sk-tab sk-tab--lg" role="tab" aria-selected="true">일반</button>
+      <button type="button" class="sk-tab sk-tab--lg" role="tab" aria-selected="false" tabindex="-1">계정</button>
+      <button type="button" class="sk-tab sk-tab--lg" role="tab" aria-selected="false" tabindex="-1">알림</button>
+    </div>
+    <div class="sk-notice sk-notice--success" role="status"><b>완료</b><span>마지막 저장: 10월 29일 14:02</span></div>
+    <section class="sk-section" aria-labelledby="sp-h-display">
+      <h2 class="sk-heading" id="sp-h-display">화면 표시</h2>
+      <div class="sk-setting"><div><label class="sk-label" for="sp-lang">언어</label><span class="sk-help">메뉴와 안내 문구에 사용할 언어입니다.</span></div>
+        <select class="sk-select" id="sp-lang"><option>한국어</option><option>English</option></select></div>
+      <div class="sk-setting"><div><span class="sk-label" id="sp-size-l">글자 크기</span><span class="sk-help">모든 화면에 적용됩니다.</span></div>
+        <div class="sk-seg" role="group" aria-labelledby="sp-size-l"><button type="button" aria-pressed="false">작게</button><button type="button" aria-pressed="true">보통</button><button type="button" aria-pressed="false">크게</button></div></div>
+      <div class="sk-setting"><div><label class="sk-label" for="sp-motion">애니메이션 줄이기</label><span class="sk-help">화면 전환 효과를 끕니다.</span></div>
+        <span class="sk-check"><input type="checkbox" id="sp-motion"></span></div>
+    </section>
+    <section class="sk-section" aria-labelledby="sp-h-backup">
+      <h2 class="sk-heading" id="sp-h-backup">백업</h2>
+      <div class="sk-setting"><div><label class="sk-label" for="sp-folder">백업 폴더</label><span class="sk-help">백업 파일을 저장할 위치입니다.</span></div>
+        <input class="sk-textfield" id="sp-folder" value="D:\Backup\Archive"></div>
+      <div class="sk-setting"><div><label class="sk-label" for="sp-backup">자동 백업</label><span class="sk-help">하루에 한 번, 컴퓨터가 켜져 있을 때 백업합니다.</span></div>
+        <span class="sk-check"><input type="checkbox" id="sp-backup" checked></span></div>
+    </section>
+    <div style="display:flex;justify-content:flex-end;flex-wrap:wrap;gap:16px">
+      <button type="button" class="sk-btn">취소</button>
+      <button type="submit" class="sk-btn sk-btn--primary">저장</button>
+    </div>
+  </form>
+</div>
+</section>
+<section class="demo-card" aria-label="Button">
+<h2 class="demo-name">Button</h2>
+<div class="sk-root" style="padding:24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+  <button type="button" class="sk-btn sk-btn--primary">저장</button>
+  <button type="button" class="sk-btn">내보내기</button>
+  <button type="button" class="sk-btn sk-btn--danger">삭제</button>
+  <button type="button" class="sk-btn" disabled>가져오기</button>
+</div>
+</section>
+<section class="demo-card" aria-label="SegmentedToggle">
+<h2 class="demo-name">SegmentedToggle</h2>
+<div class="sk-root" style="padding:24px">
+  <div class="sk-seg" id="seg" role="group" aria-label="글자 크기">
+    <button type="button" aria-pressed="true">작게</button>
+    <button type="button" aria-pressed="false">보통</button>
+    <button type="button" aria-pressed="false">크게</button>
+  </div>
+</div>
+<script>
+document.getElementById('seg').addEventListener('click', function (e) {
+  var t = e.target.closest('button');
+  if (!t) return;
+  this.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b === t ? 'true' : 'false'); });
+});
+</script>
+</section>
+<section class="demo-card" aria-label="TextField">
+<h2 class="demo-name">TextField</h2>
+<div class="sk-root" style="padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+  <div class="sk-field">
+    <label class="sk-label" for="tf-name">표시 이름 <span class="sk-required">필수</span></label>
+    <input class="sk-textfield" id="tf-name" value="Iwillbewarlock" required aria-describedby="tf-name-help">
+    <span class="sk-help" id="tf-name-help">다른 사람에게 보이는 이름입니다.</span>
+  </div>
+  <div class="sk-field sk-field--error">
+    <label class="sk-label" for="tf-mail">이메일</label>
+    <input class="sk-textfield" id="tf-mail" value="name@" aria-invalid="true" aria-describedby="tf-mail-err">
+    <span class="sk-error-text" id="tf-mail-err">이메일 주소가 올바르지 않습니다. @ 뒤에 도메인을 입력하세요.</span>
+  </div>
+  <div class="sk-field">
+    <label class="sk-label" for="tf-id">프로젝트 ID</label>
+    <input class="sk-textfield" id="tf-id" value="skald-01" readonly aria-describedby="tf-id-help">
+    <span class="sk-help" id="tf-id-help">만든 뒤에는 바꿀 수 없습니다(읽기 전용).</span>
+  </div>
+  <div class="sk-field">
+    <label class="sk-label" for="tf-off">초대 코드</label>
+    <input class="sk-textfield" id="tf-off" value="" placeholder="관리자만 입력" disabled>
+  </div>
+  <div class="sk-field" style="grid-column:1/-1">
+    <label class="sk-label" for="tf-note">메모</label>
+    <textarea class="sk-textarea" id="tf-note">다음 주 배포 전에 백업 폴더를 옮길 것.</textarea>
+  </div>
+</div>
+</section>
+<section class="demo-card" aria-label="Select">
+<h2 class="demo-name">Select</h2>
+<div class="sk-root" style="padding:24px;display:flex;flex-wrap:wrap;gap:24px">
+  <div class="sk-field">
+    <label class="sk-label" for="sel-lang">언어</label>
+    <select class="sk-select" id="sel-lang"><option>한국어</option><option>English</option><option>日本語</option><option>Deutsch</option><option>Français</option></select>
+  </div>
+  <div class="sk-field">
+    <label class="sk-label" for="sel-zone">시간대</label>
+    <select class="sk-select" id="sel-zone"><option>서울 (UTC+9)</option><option>도쿄 (UTC+9)</option><option>런던 (UTC+0)</option></select>
+  </div>
+</div>
+</section>
+<section class="demo-card" aria-label="Check">
+<h2 class="demo-name">Check</h2>
+<div class="sk-root" style="padding:24px;display:flex;flex-wrap:wrap;gap:24px">
+  <label class="sk-check"><input type="checkbox" id="chk-locked" checked> 숨김 파일 표시</label>
+  <label class="sk-check"><input type="checkbox" id="chk-names"> 자동 백업</label>
+  <input class="sk-textfield" id="search" placeholder="파일 검색..." aria-label="파일 검색">
+  <label class="sk-check"><input type="checkbox" id="chk-all"> 모두 선택(일부만 선택됨)</label>
+  <label class="sk-check"><input type="checkbox" id="chk-off" disabled> 관리자 전용</label>
+</div>
+<script>document.getElementById('chk-all').indeterminate = true;</script>
+</section>
+<section class="demo-card" aria-label="Radio">
+<h2 class="demo-name">Radio</h2>
+<div class="sk-root" style="padding:24px">
+  <fieldset style="border:0;margin:0;padding:0;display:grid;gap:12px">
+    <legend class="sk-label" style="margin-bottom:12px">저장 주기</legend>
+    <label class="sk-radio"><input type="radio" name="save" id="r-auto" checked> 내용이 바뀔 때마다</label>
+    <label class="sk-radio"><input type="radio" name="save" id="r-min"> 5분마다</label>
+    <label class="sk-radio"><input type="radio" name="save" id="r-manual" disabled> 직접 저장(관리자만)</label>
+  </fieldset>
+</div>
+</section>
+<section class="demo-card" aria-label="Tabs">
+<h2 class="demo-name">Tabs</h2>
+<div class="sk-root" style="padding:24px;display:grid;gap:16px">
+  <div class="sk-tabs" role="tablist" aria-label="설정 구역" id="tabs">
+    <button type="button" class="sk-tab sk-tab--lg" role="tab" id="t-1" aria-controls="p-1" aria-selected="true">일반</button>
+    <button type="button" class="sk-tab sk-tab--lg" role="tab" id="t-2" aria-controls="p-2" aria-selected="false" tabindex="-1">계정</button>
+    <button type="button" class="sk-tab sk-tab--lg" role="tab" id="t-3" aria-controls="p-3" aria-selected="false" tabindex="-1">알림</button>
+  </div>
+  <div role="tabpanel" id="p-1" aria-labelledby="t-1" class="sk-help">언어, 글자 크기, 화면 효과를 바꿉니다.</div>
+  <div role="tabpanel" id="p-2" aria-labelledby="t-2" class="sk-help" hidden>이름, 이메일, 비밀번호를 바꿉니다.</div>
+  <div role="tabpanel" id="p-3" aria-labelledby="t-3" class="sk-help" hidden>어떤 알림을 받을지 고릅니다.</div>
+</div>
+<script>
+(function () {
+  var list = document.getElementById('tabs');
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  function select(t) {
+    tabs.forEach(function (b) {
+      var on = b === t;
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+    });
+    t.focus();
+  }
+  list.addEventListener('click', function (e) { var t = e.target.closest('[role="tab"]'); if (t) select(t); });
+  list.addEventListener('keydown', function (e) {
+    var i = tabs.indexOf(document.activeElement); if (i < 0) return;
+    if (e.key === 'ArrowRight') select(tabs[(i + 1) % tabs.length]);
+    else if (e.key === 'ArrowLeft') select(tabs[(i - 1 + tabs.length) % tabs.length]);
+    else if (e.key === 'Home') select(tabs[0]);
+    else if (e.key === 'End') select(tabs[tabs.length - 1]);
+    else return;
+    e.preventDefault();
+  });
+})();
+</script>
+</section>
+<section class="demo-card" aria-label="TopBar">
+<h2 class="demo-name">TopBar</h2>
+<div class="sk-root">
+  <header class="sk-topbar">
+    <span class="sk-brand">Archive</span>
+    <nav aria-label="주 메뉴">
+      <a href="#" aria-current="page">대시보드</a>
+      <a href="#">프로젝트</a>
+      <a href="#">파일</a>
+      <a href="#">설정</a>
+    </nav>
+    <button type="button" class="sk-btn sk-btn--primary">새 프로젝트</button>
+  </header>
+</div>
+</section>
+<section class="demo-card" aria-label="Table">
+<h2 class="demo-name">Table</h2>
+<div class="sk-root" style="padding:24px;display:grid;gap:24px">
+  <div class="sk-table-wrap">
+    <table class="sk-table" aria-label="작업 목록">
+      <thead><tr><th scope="col">이름</th><th scope="col">상태</th><th scope="col" class="num">크기</th><th scope="col" class="num">수정일</th></tr></thead>
+      <tbody>
+        <tr><td>설정 백업</td><td><span class="sk-badge sk-badge--success">완료</span></td><td class="num">1.2 MB</td><td class="num">10-29 14:02</td></tr>
+        <tr><td>이미지 변환</td><td><span class="sk-badge sk-badge--warning">진행 중</span></td><td class="num">48.6 MB</td><td class="num">10-29 13:40</td></tr>
+        <tr><td>로그 업로드</td><td><span class="sk-badge sk-badge--error">실패</span></td><td class="num">312 KB</td><td class="num">10-28 22:15</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sk-table-wrap">
+    <table class="sk-table" aria-label="공유한 파일">
+      <thead><tr><th scope="col">이름</th><th scope="col" class="num">크기</th></tr></thead>
+      <tbody><tr><td colspan="2" class="sk-table-state">데이터를 불러오지 못했습니다. 네트워크 연결을 확인하세요. <button type="button" class="sk-btn">다시 시도</button></td></tr></tbody>
+    </table>
+  </div>
+</div>
+</section>
+<section class="demo-card" aria-label="Badge">
+<h2 class="demo-name">Badge</h2>
+<div class="sk-root" style="padding:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+  <span class="sk-badge">v1.6</span>
+  <span class="sk-badge">베타</span>
+  <span class="sk-badge sk-badge--success">완료</span>
+  <span class="sk-badge sk-badge--warning">진행 중</span>
+  <span class="sk-badge sk-badge--error">실패</span>
+</div>
+</section>
+<section class="demo-card" aria-label="Notice">
+<h2 class="demo-name">Notice</h2>
+<div class="sk-root" style="padding:24px;display:grid;gap:12px">
+  <div class="sk-notice sk-notice--success" role="status"><b>완료</b><span>설정을 저장했습니다.</span></div>
+  <div class="sk-notice sk-notice--warning" role="status"><b>주의</b><span>저장 공간이 10% 남았습니다. 오래된 백업을 지우세요.</span></div>
+  <div class="sk-notice sk-notice--error" role="alert"><b>오류</b><span>서버에 연결하지 못했습니다. 인터넷 연결을 확인하고 다시 시도하세요.</span></div>
+  <div class="sk-notice sk-notice--info" role="status"><b>안내</b><span>새 버전(1.6.1)을 받을 수 있습니다.</span></div>
+</div>
+</section>
+<section class="demo-card" aria-label="Progress">
+<h2 class="demo-name">Progress</h2>
+<div class="sk-root" style="padding:24px;display:grid;gap:20px;max-width:480px">
+  <div class="sk-progress">
+    <div class="sk-progress-label"><span>파일 올리는 중</span><span>64%</span></div>
+    <div class="sk-progress-track" role="progressbar" aria-label="파일 올리는 중" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"><div class="sk-progress-bar" style="width:64%"></div></div>
+  </div>
+  <div class="sk-progress">
+    <div class="sk-progress-label"><span>저장 공간</span><span>18.2 / 20 GB</span></div>
+    <div class="sk-progress-track" role="progressbar" aria-label="저장 공간" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"><div class="sk-progress-bar" style="width:91%"></div></div>
+  </div>
+</div>
+</section>
+<section class="demo-card" aria-label="Dialog">
+<h2 class="demo-name">Dialog</h2>
+<div class="sk-root sk-scrim" style="min-height:300px">
+  <div class="sk-dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title" aria-describedby="dlg-desc">
+    <div class="sk-dialog-header">
+      <h3 id="dlg-title">프로젝트 삭제</h3>
+      <button type="button" class="sk-close" aria-label="닫기">×</button>
+    </div>
+    <div class="sk-dialog-body">
+      <p style="margin:0" id="dlg-desc">skald-01 프로젝트와 파일 214개를 지웁니다. 지운 뒤에는 되돌릴 수 없습니다.</p>
+    </div>
+    <div class="sk-dialog-footer">
+      <button type="button" class="sk-btn">취소</button>
+      <button type="button" class="sk-btn sk-btn--danger">삭제</button>
+    </div>
+  </div>
+</div>
+</section>
+<section class="demo-card" aria-label="Tooltip">
+<h2 class="demo-name">Tooltip</h2>
+<div class="sk-root" style="padding:24px">
+  <div class="sk-tooltip" role="tooltip"><strong>자동 저장</strong>바뀐 내용을 5초 안에 서버에 저장합니다.</div>
+</div>
+</section>
+<section class="demo-card" aria-label="Panel">
+<h2 class="demo-name">Panel</h2>
+<style>
+  .demo { padding: 16px; }
+  .demo .sk-panel { min-height: 480px; }
+  .demo .sk-panel-header { padding: 20px 64px 12px; }
+  .demo .sk-panel-header .sk-btn { margin-left: auto; }
+  .demo .sk-panel-body { display: grid; gap: 16px; padding: 24px 64px; }
+  .demo .sk-card { display: grid; gap: 8px; max-width: 420px; }
+  .demo .meta { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.3px; }
+  .demo p { margin: 0; line-height: 1.4; }
+  .demo .row { display: flex; flex-wrap: wrap; gap: 16px; }
+</style>
+<div class="demo">
+  <section class="sk-panel sk-root">
+    <img class="sk-corner sk-corner--tl" src="assets/corner.png" alt="">
+    <img class="sk-corner sk-corner--tr" src="assets/corner.png" alt="">
+    <img class="sk-corner sk-corner--bl" src="assets/corner.png" alt="">
+    <img class="sk-corner sk-corner--br" src="assets/corner.png" alt="">
+    <header class="sk-panel-header">
+      <h1 class="sk-title">Archive</h1>
+      <button type="button" class="sk-btn">설정</button>
+    </header>
+    <div class="sk-panel-body">
+      <h2 class="sk-heading">최근 문서</h2>
+      <hr class="sk-rule">
+      <article class="sk-card">
+        <h3 class="sk-heading" style="letter-spacing:1px">출시 계획</h3>
+        <span class="meta">문서 · 3쪽 · 10월 29일 수정</span>
+        <p>다음 달 출시 일정과 남은 작업을 정리한 문서입니다. 검토자 두 명이 의견을 남겼습니다.</p>
+        <div class="row">
+          <button type="button" class="sk-btn sk-btn--primary">열기</button>
+          <button type="button" class="sk-btn">공유</button>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+</section>
+<section class="demo-card" aria-label="EmptyState">
+<h2 class="demo-name">EmptyState</h2>
+<style>
+  .empty { background: var(--smoke-950); display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 16px 32px; text-align: center; }
+  .empty img { width: 360px; max-width: 80%; height: auto; }
+  .empty .cap { font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); }
+  .empty .hint { font-size: 13.6px; color: rgba(232, 228, 216, 0.7); }
+</style>
+<div class="sk-root empty">
+  <img src="assets/empty.png" alt="">
+  <div class="cap">아직 프로젝트가 없습니다</div>
+  <div class="hint">새 프로젝트를 만들거나 파일을 끌어다 놓으세요.</div>
+  <button type="button" class="sk-btn sk-btn--primary">새 프로젝트</button>
+</div>
+</section>
+<section class="demo-card" aria-label="SchoolTabs">
+<h2 class="demo-name">SchoolTabs</h2>
+<div class="sk-root" style="padding:24px">
+  <div class="sk-tabs" role="tablist" id="school-tabs">
+    <button type="button" class="sk-tab" role="tab" aria-selected="false">변이 마법</button>
+    <button type="button" class="sk-tab" role="tab" aria-selected="false">소환 마법</button>
+    <button type="button" class="sk-tab" role="tab" aria-selected="true">파괴 마법</button>
+    <button type="button" class="sk-tab" role="tab" aria-selected="false">환영 마법</button>
+    <button type="button" class="sk-tab" role="tab" aria-selected="false">회복 마법</button>
+  </div>
+</div>
+<script>
+document.getElementById('school-tabs').addEventListener('click', function (e) {
+  var t = e.target.closest('.sk-tab');
+  if (!t) return;
+  this.querySelectorAll('.sk-tab').forEach(function (b) { b.setAttribute('aria-selected', b === t ? 'true' : 'false'); });
+});
+</script>
+</section>
+<section class="demo-card" aria-label="SchoolMarks">
+<h2 class="demo-name">SchoolMarks</h2>
+<style>
+  .marks { display: flex; flex-wrap: wrap; gap: 28px; padding: 24px; }
+  .marks figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .marks figcaption { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); }
+  .marks .sk-mark { width: 36px; height: 36px; }
+</style>
+<div class="sk-root marks">
+  <figure>
+    <svg class="sk-mark" viewBox="-1.2 -1.2 2.4 2.4" aria-hidden="true"><polygon points="0,-0.92 0.95,0.8 -0.95,0.8" style="fill:var(--school-alteration)"/></svg>
+    <figcaption>변이 마법</figcaption>
+  </figure>
+  <figure>
+    <svg class="sk-mark" viewBox="-1.2 -1.2 2.4 2.4" aria-hidden="true"><polygon points="0,-0.97 0.26,-0.28 0.99,-0.25 0.42,0.21 0.62,0.93 0,0.53 -0.62,0.93 -0.42,0.21 -0.99,-0.25 -0.26,-0.28" style="fill:var(--school-conjuration)"/></svg>
+    <figcaption>소환 마법</figcaption>
+  </figure>
+  <figure>
+    <svg class="sk-mark" viewBox="-1.2 -1.2 2.4 2.4" aria-hidden="true"><path d="M0.15,-1.05 C0.75,-0.45 0.95,0.05 0.75,0.5 C0.55,0.95 -0.55,0.95 -0.75,0.5 C-0.9,0.15 -0.75,-0.2 -0.5,-0.5 C-0.45,-0.2 -0.3,-0.05 -0.12,0 C-0.25,-0.45 -0.1,-0.8 0.15,-1.05Z" style="fill:var(--school-destruction)"/></svg>
+    <figcaption>파괴 마법</figcaption>
+  </figure>
+  <figure>
+    <svg class="sk-mark" viewBox="-1.2 -1.2 2.4 2.4" aria-hidden="true"><path d="M-1.05,0 Q0,-0.95 1.05,0 Q0,0.95 -1.05,0Z" style="fill:var(--school-illusion)"/><circle r="0.3" style="fill:var(--smoke-900)"/></svg>
+    <figcaption>환영 마법</figcaption>
+  </figure>
+  <figure>
+    <svg class="sk-mark" viewBox="-1.2 -1.2 2.4 2.4" aria-hidden="true"><path d="M-0.3,-1 H0.3 V-0.3 H1 V0.3 H0.3 V1 H-0.3 V0.3 H-1 V-0.3 H-0.3Z" style="fill:var(--school-restoration)"/></svg>
+    <figcaption>회복 마법</figcaption>
+  </figure>
+</div>
+</section>
+</body>
+</html>

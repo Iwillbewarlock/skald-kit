@@ -1,0 +1,91 @@
+/* Skald tokens: every value as a CSS variable. Generated from tokens.json; do not edit by hand. */
+:root {
+    /* colour */
+    --smoke-950: #070708;
+    --smoke-900: #0b0b0c;
+    --smoke-850: #0e0e0f;
+    --smoke-800: #121212;
+    --void: #000000;
+    --glow: #1e1d1a;
+    --edge-dim: #1c1b19;
+    --edge: #4a4740;
+    --locked: #6f6b62;
+    --ink-faint: #8f8a7e;
+    --ink-dim: #a29c8f;
+    --ink-soft: #cbc5b6;
+    --rule: #cfc9b8;
+    --ink: #e8e4d8;
+    --ink-bright: #fffbef;
+    --wash-06: rgba(232, 228, 216, 0.06);
+    --wash-08: rgba(232, 228, 216, 0.08);
+    --wash-14: rgba(232, 228, 216, 0.14);
+    --wash-16: rgba(232, 228, 216, 0.16);
+    --well: rgba(0, 0, 0, 0.55);
+    --tools: rgba(8, 8, 9, 0.94);
+    --school-alteration: #93acbf;
+    --school-conjuration: #b89cae;
+    --school-destruction: #cc9c76;
+    --school-illusion: #c6bb8c;
+    --school-restoration: #90b4a2;
+    --status-working: #f0b04c;
+    --status-done: #8ccf84;
+    --status-error: #ee7e6e;
+    --danger: #f09488;
+    --bg: var(--smoke-900);
+    --surface: var(--smoke-850);
+    --surface-deep: var(--smoke-950);
+    --surface-top: var(--smoke-800);
+    --text: var(--ink);
+    --text-muted: var(--ink-soft);
+    --text-strong: var(--ink-bright);
+    --accent: var(--rule);
+    --border: var(--edge);
+    --border-control: var(--ink-faint);
+    --focus: var(--ink-bright);
+    --success: var(--status-done);
+    --warning: #f0b04c;
+    --error: var(--status-error);
+    --scrim: rgba(0, 0, 0, 0.7);
+    --category-1: var(--school-alteration);
+    --category-2: var(--school-conjuration);
+    --category-3: var(--school-destruction);
+    --category-4: var(--school-illusion);
+    --category-5: var(--school-restoration);
+    /* space */
+    --space-1: 2px;
+    --space-2: 4px;
+    --space-tooling: 5px;
+    --space-3: 8px;
+    --space-4: 12px;
+    --space-5: 16px;
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 48px;
+    /* radius */
+    --radius-none: 0;
+    --radius-hairline: 2px;
+    --radius-round: 50%;
+    /* line */
+    --line-hair: 1px;
+    --line-tab: 2px;
+    --line-path: 2.2px;
+    --line-focus: 2px;
+    /* type */
+    --font-skald: "Bahnschrift SemiCondensed", "Bahnschrift", "Futura Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+    --font-mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+}
+
+/* Type roles as classes */
+.sk-type-title { font-family: var(--font-skald); font-size: 30.4px; font-weight: 400; line-height: 1.1; letter-spacing: 5px; text-transform: uppercase; }
+.sk-type-heading { font-family: var(--font-skald); font-size: 16px; font-weight: 500; line-height: 1.3; letter-spacing: 2px; text-transform: uppercase; }
+.sk-type-body { font-family: var(--font-skald); font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: 0.5px; }
+.sk-type-control { font-family: var(--font-skald); font-size: 13.6px; font-weight: 400; line-height: 1.2; letter-spacing: 0.3px; }
+.sk-type-tab { font-family: var(--font-skald); font-size: 12.8px; font-weight: 400; line-height: 1.2; letter-spacing: 0.5px; text-transform: uppercase; }
+.sk-type-small { font-family: var(--font-skald); font-size: 12px; font-weight: 400; line-height: 1.3; letter-spacing: 0.3px; }
+.sk-type-h1 { font-family: var(--font-skald); font-size: 30.4px; font-weight: 400; line-height: 1.1; letter-spacing: 5px; text-transform: uppercase; }
+.sk-type-h2 { font-family: var(--font-skald); font-size: 16px; font-weight: 500; line-height: 1.3; letter-spacing: 2px; text-transform: uppercase; }
+.sk-type-h3 { font-family: var(--font-skald); font-size: 15.2px; font-weight: 400; line-height: 1.3; letter-spacing: 2px; text-transform: uppercase; }
+.sk-type-label { font-family: var(--font-skald); font-size: 15.2px; font-weight: 500; line-height: 1.3; letter-spacing: 0.3px; }
+.sk-type-body-sm { font-family: var(--font-skald); font-size: 13.6px; font-weight: 400; line-height: 1.4; letter-spacing: 0.3px; }
+.sk-type-caption { font-family: var(--font-skald); font-size: 12px; font-weight: 400; line-height: 1.4; letter-spacing: 0.3px; }
+.sk-type-code { font-family: var(--font-mono); font-size: 13px; font-weight: 400; line-height: 1.4; }
